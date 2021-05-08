@@ -47,6 +47,9 @@ create-xcframework() {
         -configuration $CONFIGURATION \
         -archivePath $archive_path_ios \
         -quiet
+
+    # Remove Existing XCFramework
+    rm -r "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework"
     
     # Create XCFramework
     xcodebuild \
