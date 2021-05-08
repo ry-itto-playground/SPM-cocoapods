@@ -11,6 +11,8 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install Bundler
+        run: gem install bundler -v 1.17.2
       - name: Bundle
         run: bundle
       - name: Pod
