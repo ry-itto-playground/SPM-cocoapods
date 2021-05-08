@@ -6,12 +6,15 @@ PODS_PROJECT=Pods/Pods.xcodeproj
 DESTINATION_IOS_SIMULATOR='generic/platform=iOS Simulator'
 DESTINATION_IOS='generic/platform=iOS'
 CONFIGURATION=Release
-ARCHIVE_PATH_IOS_SIMULATOR=build/Pods-iOS-Simulator.xcarchive
-ARCHIVE_PATH_IOS=build/Pods-iOS.xcarchive
+ARCHIVE_PATH_PODS=build/Pods
+ARCHIVE_FILE_IOS_SIMULATOR=iOS-Simulator.xcarchive
+ARCHIVE_FILE_IOS=iOS.xcarchive
 XCFRAMEWORK_OUTPUT=build
 
 create-xcframework() {
     scheme_name=$1
+    archive_path_ios="$ARCHIVE_PATH_PODS/$scheme_name/$ARCHIVE_FILE_IOS"
+    archive_path_ios_simulator="$ARCHIVE_PATH_PODS/$scheme_name/$ARCHIVE_FILE_IOS_SIMULATOR"
 
     echo "Create XCFramework for $scheme_name..."
 
@@ -27,7 +30,7 @@ create-xcframework() {
         -scheme $scheme_name \
         -destination "$DESTINATION_IOS_SIMULATOR" \
         -configuration $CONFIGURATION \
-        -archivePath $ARCHIVE_PATH_IOS_SIMULATOR \
+        -archivePath $archive_path_ios_simulator \
         -quiet
 
     # Build Cocoapods Library for iOS Device
@@ -42,14 +45,14 @@ create-xcframework() {
         -scheme $scheme_name \
         -destination "$DESTINATION_IOS" \
         -configuration $CONFIGURATION \
-        -archivePath $ARCHIVE_PATH_IOS \
+        -archivePath $archive_path_ios \
         -quiet
     
     # Create XCFramework
     xcodebuild \
         -create-xcframework \
-        -framework "$ARCHIVE_PATH_IOS/Products/Library/Frameworks/$scheme_name.framework" \
-        -framework "$ARCHIVE_PATH_IOS_SIMULATOR/Products/Library/Frameworks/$scheme_name.framework" \
+        -framework "$archive_path_ios/Products/Library/Frameworks/$scheme_name.framework" \
+        -framework "$archive_path_ios_simulator/Products/Library/Frameworks/$scheme_name.framework" \
         -output "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework"
 }
 
