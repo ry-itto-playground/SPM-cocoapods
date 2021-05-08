@@ -1,9 +1,20 @@
 #! /bin/bash
 
+set -eu
+
+PODS_PROJECT=Pods/Pods.xcodeproj
+DESTINATION_IOS_SIMULATOR='generic/platform=iOS Simulator'
+DESTINATION_IOS='generic/platform=iOS'
+CONFIGURATION=Release
+ARCHIVE_PATH_IOS_SIMULATOR=build/Pods-iOS-Simulator.xcarchive
+ARCHIVE_PATH_IOS=build/Pods-iOS.xcarchive
+XCFRAMEWORK_OUTPUT=build
+
 create-xcframework() {
     scheme_name=$1
 
-    echo "Create XCFramework for $scheme_name ..."
+    echo "Create XCFramework for $scheme_name..."
+
     # Build Cocoapods Library for iOS Simulator
     xcodebuild \
         'ENABLE_BITCODE=YES' \
@@ -12,11 +23,11 @@ create-xcframework() {
         'BUILD_LIBRARY_FOR_DISTRIBUTION=YES' \
         'SKIP_INSTALL=NO' \
         archive \
-        -project 'Pods/Pods.xcodeproj' \
+        -project $PODS_PROJECT \
         -scheme $scheme_name \
-        -destination 'generic/platform=iOS Simulator' \
-        -configuration 'Release' \
-        -archivePath 'build/Pods-iOS-Simulator.xcarchive' \
+        -destination "$DESTINATION_IOS_SIMULATOR" \
+        -configuration $CONFIGURATION \
+        -archivePath $ARCHIVE_PATH_IOS_SIMULATOR \
         -quiet
 
     # Build Cocoapods Library for iOS Device
@@ -27,23 +38,23 @@ create-xcframework() {
         'BUILD_LIBRARY_FOR_DISTRIBUTION=YES' \
         'SKIP_INSTALL=NO' \
         archive \
-        -project 'Pods/Pods.xcodeproj' \
+        -project $PODS_PROJECT \
         -scheme $scheme_name \
-        -destination 'generic/platform=iOS' \
-        -configuration 'Release' \
-        -archivePath 'build/Pods-iOS.xcarchive' \
+        -destination "$DESTINATION_IOS" \
+        -configuration $CONFIGURATION \
+        -archivePath $ARCHIVE_PATH_IOS \
         -quiet
     
     # Create XCFramework
     xcodebuild \
         -create-xcframework \
-        -framework "build/Pods-iOS.xcarchive/Products/Library/Frameworks/$scheme_name.framework" \
-        -framework "build/Pods-iOS-Simulator.xcarchive/Products/Library/Frameworks/$scheme_name.framework" \
-        -output "build/$scheme_name.xcframework"
+        -framework "$ARCHIVE_PATH_IOS/Products/Library/Frameworks/$scheme_name.framework" \
+        -framework "$ARCHIVE_PATH_IOS_SIMULATOR/Products/Library/Frameworks/$scheme_name.framework" \
+        -output "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework"
 }
 
 schemes=`xcodebuild \
-    -project 'Pods/Pods.xcodeproj' \
+    -project $PODS_PROJECT \
     -list |
     tr -d '\n' |
     awk '{sub("^.*Schemes:", ""); print $0}'`
