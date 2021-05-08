@@ -3,15 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2F92612646C68D003C9898 /* SampleLib in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2F92602646C68D003C9898 /* SampleLib */; };
+		8C2F92622646C68D003C9898 /* SampleLib in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8C2F92602646C68D003C9898 /* SampleLib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E849B400264527FC00427660 /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E849B3FF264527FC00427660 /* SampleApp.swift */; };
 		E849B402264527FC00427660 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E849B401264527FC00427660 /* ContentView.swift */; };
 		E849B404264527FE00427660 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E849B403264527FE00427660 /* Assets.xcassets */; };
 		E849B407264527FE00427660 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E849B406264527FE00427660 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8C3996452646C3CE0098A55C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C2F92622646C68D003C9898 /* SampleLib in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E849B3FC264527FC00427660 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,17 +43,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2F92612646C68D003C9898 /* SampleLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3996392646BCAD0098A55C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E849B3F3264527FC00427660 = {
 			isa = PBXGroup;
 			children = (
 				E849B3FE264527FC00427660 /* Sample */,
 				E849B3FD264527FC00427660 /* Products */,
+				8C3996392646BCAD0098A55C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,12 +104,16 @@
 				E849B3F8264527FC00427660 /* Sources */,
 				E849B3F9264527FC00427660 /* Frameworks */,
 				E849B3FA264527FC00427660 /* Resources */,
+				8C3996452646C3CE0098A55C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Sample;
+			packageProductDependencies = (
+				8C2F92602646C68D003C9898 /* SampleLib */,
+			);
 			productName = Sample;
 			productReference = E849B3FC264527FC00427660 /* Sample.app */;
 			productType = "com.apple.product-type.application";
@@ -269,9 +298,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Sample/Preview Content\"";
+				DEVELOPMENT_TEAM = DFY27HWN2G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -290,9 +320,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Sample/Preview Content\"";
+				DEVELOPMENT_TEAM = DFY27HWN2G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,6 +357,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8C2F92602646C68D003C9898 /* SampleLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SampleLib;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E849B3F4264527FC00427660 /* Project object */;
 }

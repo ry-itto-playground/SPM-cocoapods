@@ -6,18 +6,24 @@ let package = Package(
     name: "Sample",
     products: [
         .library(
-            name: "Sample",
-            targets: ["Sample"]),
+            name: "SampleLib",
+            type: .dynamic,
+            targets: ["SampleLib"]),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "Sample",
+            name: "SampleLib",
             dependencies: [
+                .target(name: "RxSwift"),
             ]),
         .testTarget(
             name: "SampleTests",
-            dependencies: ["Sample"]),
+            dependencies: ["SampleLib"]),
+        .binaryTarget(
+            name: "RxSwift",
+            path: "build/RxSwift.xcframework"
+        )
     ]
 )

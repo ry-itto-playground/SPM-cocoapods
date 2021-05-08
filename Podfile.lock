@@ -1,16 +1,16 @@
 PODS:
-  - QiitaAPIKit (0.0.9)
+  - RxSwift (6.1.0)
 
 DEPENDENCIES:
-  - QiitaAPIKit
+  - RxSwift
 
 SPEC REPOS:
   trunk:
-    - QiitaAPIKit
+    - RxSwift
 
 SPEC CHECKSUMS:
-  QiitaAPIKit: a1859ba4a8ca5460c830b649a66d2adaae8e11c2
+  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
 
-PODFILE CHECKSUM: 197c923dee867e161f9a308e0654fa46a596ca57
+PODFILE CHECKSUM: 454215611395edce5e48e6bcbf104a86a53c2e4c
 
 COCOAPODS: 1.10.1
