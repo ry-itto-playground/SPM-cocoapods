@@ -6,8 +6,7 @@ PODS_PROJECT=Pods/Pods.xcodeproj
 DESTINATION_IOS_SIMULATOR='generic/platform=iOS Simulator'
 DESTINATION_IOS='generic/platform=iOS'
 CONFIGURATION=Release
-ARCHIVE_PATH_PODS=build/Pods
-ARCHIVE_FILE_IOS_SIMULATOR=iOS-Simulator.xcarchive
+ARCHIVE_PATH_PODS=build/Pods ARCHIVE_FILE_IOS_SIMULATOR=iOS-Simulator.xcarchive
 ARCHIVE_FILE_IOS=iOS.xcarchive
 XCFRAMEWORK_OUTPUT=build
 
@@ -49,7 +48,9 @@ create-xcframework() {
         -quiet
 
     # Remove Existing XCFramework
-    rm -r "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework"
+    if [ -d "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework" ]; then
+        rm -r "$XCFRAMEWORK_OUTPUT/$scheme_name.xcframework"
+    fi
     
     # Create XCFramework
     xcodebuild \

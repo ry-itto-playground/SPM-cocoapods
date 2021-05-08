@@ -1,0 +1,23 @@
+name: Build Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Bundler
+        run: gem install bundler -v 1.17.2
+      - name: Bundle
+        run: bundle
+      - name: Pod
+        run: bundle exec pod install
+      - name: Create XCFrameworks
+        run: ./scripts/generate-pods-xcframeworks.sh
+      - name: Build
+        run: xcodebuild -workspace Sample.xcworkspace -scheme Sample -destination 'generic/platform=iOS Simulator'
